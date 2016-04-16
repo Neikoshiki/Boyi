@@ -106,7 +106,7 @@
 		C0F0112A1CC1CC4F00B1C09B /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
 		C0F0112B1CC1CC4F00B1C09B /* HotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotViewController.m; sourceTree = "<group>"; };
 		C0F0112C1CC1CC4F00B1C09B /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
-		C0F0112F1CC1DFA500B1C09B /* URLHeaderDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLHeaderDefine.h; sourceTree = "<group>"; };
+		C0F0112F1CC1DFA500B1C09B /* URLHeaderDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = URLHeaderDefine.h; path = ../URLHeaderDefine.h; sourceTree = "<group>"; };
 		C0F011301CC1E13400B1C09B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		CD38576D402E68F13D5966B5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DF853D1D3FF77D9809F07A71 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,6 +345,7 @@
 				C01F64041CC12F77002EE3FA /* FlowingMenuDelegate.swift */,
 				C01F64031CC12F76002EE3FA /* Boyi-Bridging-Header.h */,
 				C01F64481CC1324E002EE3FA /* FrameDefineHeader.h */,
+				C0F0112F1CC1DFA500B1C09B /* URLHeaderDefine.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -356,7 +357,6 @@
 				C01F63C41CC12E7F002EE3FA /* AppDelegate.m */,
 				C01F63C61CC12E7F002EE3FA /* ViewController.h */,
 				C01F63C71CC12E7F002EE3FA /* ViewController.m */,
-				C0F0112F1CC1DFA500B1C09B /* URLHeaderDefine.h */,
 				C0F011301CC1E13400B1C09B /* PrefixHeader.pch */,
 			);
 			name = Others;
