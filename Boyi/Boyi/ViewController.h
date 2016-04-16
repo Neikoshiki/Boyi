@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController
 
+// 菜单点击
+@property (nonatomic, copy) void(^menuDidClick)(NSString *viewControllerName);
 
 @end
 

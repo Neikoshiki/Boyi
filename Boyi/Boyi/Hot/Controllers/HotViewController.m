@@ -1,23 +1,23 @@
 //
-//  HomeViewController.m
+//  HotViewController.m
 //  Boyi
 //
-//  Created by Shvier on 16/4/15.
+//  Created by Shvier on 16/4/16.
 //  Copyright © 2016年 Shvier. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "HotViewController.h"
 #import "UIScrollView+JElasticPullToRefresh.h"
 
 #define kReuseIdentifier @"reuseIdentifier"
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface HotViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation HomeViewController
+@implementation HotViewController
 
 #pragma mark -TableView 代理方法-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -33,9 +33,7 @@
 - (void)initTableView {
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kReuseIdentifier];
-    self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
-    
     JElasticPullToRefreshLoadingViewCircle *loadingViewCircle = [[JElasticPullToRefreshLoadingViewCircle alloc] init];
     loadingViewCircle.tintColor = [UIColor whiteColor];
     
@@ -48,11 +46,11 @@
     [self.tableView setJElasticPullToRefreshBackgroundColor:self.tableView.backgroundColor];
 }
 
-#pragma mark -视图加载-
+#pragma mark -加载视图-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"首页";
+    self.navigationItem.title = @"热门";
     
     [self initTableView];
 }

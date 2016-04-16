@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ViewController;
 
 @interface LeftMenuViewController : UIViewController
+
+@property (nonatomic, weak) ViewController *rootVC;
 
 @end
