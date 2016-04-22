@@ -35,6 +35,7 @@
 		C01F64411CC130F9002EE3FA /* AtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01F64401CC130F9002EE3FA /* AtViewController.m */; };
 		C01F64441CC130FF002EE3FA /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01F64431CC130FF002EE3FA /* MessageViewController.m */; };
 		C01F64471CC13106002EE3FA /* LikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01F64461CC13106002EE3FA /* LikeViewController.m */; };
+		C0688DF71CCA287500133C07 /* OAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0688DF61CCA287500133C07 /* OAuthModel.m */; };
 		C0F0112D1CC1CC4F00B1C09B /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F0112B1CC1CC4F00B1C09B /* HotViewController.m */; };
 		C0F0112E1CC1CC4F00B1C09B /* HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0F0112C1CC1CC4F00B1C09B /* HotViewController.xib */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,8 @@
 		C01F64451CC13106002EE3FA /* LikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeViewController.h; sourceTree = "<group>"; };
 		C01F64461CC13106002EE3FA /* LikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeViewController.m; sourceTree = "<group>"; };
 		C01F64481CC1324E002EE3FA /* FrameDefineHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameDefineHeader.h; sourceTree = "<group>"; };
+		C0688DF51CCA287500133C07 /* OAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthModel.h; sourceTree = "<group>"; };
+		C0688DF61CCA287500133C07 /* OAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthModel.m; sourceTree = "<group>"; };
 		C0F0112A1CC1CC4F00B1C09B /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
 		C0F0112B1CC1CC4F00B1C09B /* HotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotViewController.m; sourceTree = "<group>"; };
 		C0F0112C1CC1CC4F00B1C09B /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 		C01F63FC1CC12ED6002EE3FA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C0688DF51CCA287500133C07 /* OAuthModel.h */,
+				C0688DF61CCA287500133C07 /* OAuthModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				C01F640E1CC12F86002EE3FA /* FlowingMenuTransitionManager+Delegate.swift in Sources */,
 				C01F63C51CC12E7F002EE3FA /* AppDelegate.m in Sources */,
 				C01F63C21CC12E7F002EE3FA /* main.m in Sources */,
+				C0688DF71CCA287500133C07 /* OAuthModel.m in Sources */,
 				C01F642D1CC13050002EE3FA /* ExploreViewController.m in Sources */,
 				C01F64101CC12F86002EE3FA /* FlowingMenuTransitionManager+UIViewControllerAnimatedTransitioning.swift in Sources */,
 			);
@@ -779,11 +785,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = Boyi/PrefixHeader.pch;
 				INFOPLIST_FILE = Boyi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Shvier.Boyi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Shvier2.Boyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Boyi/Tools/Boyi-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -796,11 +804,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = Boyi/PrefixHeader.pch;
 				INFOPLIST_FILE = Boyi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Shvier.Boyi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Shvier2.Boyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Boyi/Tools/Boyi-Bridging-Header.h";
 			};
