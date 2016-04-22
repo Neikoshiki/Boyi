@@ -24,6 +24,19 @@
 
 @implementation HomeViewController
 
+#pragma mark -权限获取-
+- (void)initOAuth {
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [self.view addSubview:webView];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.weibo.com/oauth2/authorize"]];
+    request.HTTPMethod = @"POST";
+    NSString *parameter = [NSString stringWithFormat:@"client_id=%@&redirect_uri=%@", AppKey, @"https://api.weibo.com/oauth2/default.html"];
+    NSData *requestBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = requestBody;
+    [webView loadRequest:request];
+    webView.delegate = self;
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSString *url = webView.request.URL.absoluteString;
     NSLog(@"%@", url);
@@ -85,17 +98,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
-    [self initTableView];
     
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [self.view addSubview:webView];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.weibo.com/oauth2/authorize"]];
-    request.HTTPMethod = @"POST";
-    NSString *parameter = [NSString stringWithFormat:@"client_id=%@&redirect_uri=%@", AppKey, @"https://api.weibo.com/oauth2/default.html"];
-    NSData *requestBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
-    request.HTTPBody = requestBody;
-    [webView loadRequest:request];
-    webView.delegate = self;
+    [self initTableView];
+    [self initOAuth];
 }
 
 - (void)dealloc {
