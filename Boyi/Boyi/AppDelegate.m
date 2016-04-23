@@ -7,8 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "URLHeaderDefine.h"
+#import "OAuthModel.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <UIWebViewDelegate>
+
+@property (nonatomic, strong) NSString *weiboCode;
+@property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) OAuthModel *oauthModel;
 
 @end
 
@@ -17,7 +23,51 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+//    UIWebView *webView = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:kAuthorizeURL]];
+//    request.HTTPMethod = @"POST";
+//    NSString *parameter = [NSString stringWithFormat:@"client_id=%@&redirect_uri=%@", AppKey, kRedirectURL];
+//    NSData *requestBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
+//    request.HTTPBody = requestBody;
+//    [webView loadRequest:request];
+//    webView.delegate = self;
+//    [self.window addSubview:webView];
+    
     return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSString *url = webView.request.URL.absoluteString;
+    NSLog(@"%@", url);
+    if ([url hasPrefix:kRedirectURL]) {
+        NSArray *urlArray = [url componentsSeparatedByString:@"?"];
+        self.weiboCode = [urlArray[1] substringFromIndex:5];
+        NSLog(@"code:%@", self.weiboCode);
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:kAccessTokenURL]];
+        request.HTTPMethod = @"POST";
+        NSString *parameter = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&grant_type=authorization_code&redirect_uri=%@&code=%@", AppKey, AppSecret, kRedirectURL, self.weiboCode];
+        NSData *requestBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
+        request.HTTPBody = requestBody;
+        [webView loadRequest:request];
+    } else if ([url hasPrefix:kAccessTokenURL]) {
+        NSString *jsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";
+        NSString *HTMLSource = [webView stringByEvaluatingJavaScriptFromString:jsToGetHTMLSource];
+        NSArray *htmlArray = [HTMLSource componentsSeparatedByString:@"{"];
+        NSArray *array1 = [htmlArray[1] componentsSeparatedByString:@"}"];
+        NSString *result = [[@"{" stringByAppendingString:array1[0]] stringByAppendingString:@"}"];
+        NSData *data = [result dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        self.oauthModel = [[OAuthModel alloc] init];
+        [self.oauthModel setValuesForKeysWithDictionary:dict];
+        NSLog(@"%@", self.oauthModel);
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?access_token=%@&uid=%@", kUserInfoURL, self.oauthModel.access_token, self.oauthModel.uid]]];
+        NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@", dict);
+        }];
+        [task resume];
+        [webView removeFromSuperview];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

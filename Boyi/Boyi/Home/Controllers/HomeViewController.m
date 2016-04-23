@@ -10,27 +10,35 @@
 #import "UIScrollView+JElasticPullToRefresh.h"
 
 #import "OAuthModel.h"
+#import "URLHeaderDefine.h"
 
 #define kReuseIdentifier @"reuseIdentifier"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSString *weiboCode;
-@property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, copy) NSString *weiboCode;
+@property (nonatomic, copy) NSString *accessToken;
 @property (nonatomic, strong) OAuthModel *oauthModel;
 
 @end
 
 @implementation HomeViewController
 
+- (OAuthModel *)oauthModel {
+    if (!_oauthModel) {
+        self.oauthModel = [[OAuthModel alloc] init];
+    }
+    return _oauthModel;
+}
+
 #pragma mark -权限获取-
 - (void)initOAuth {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.view addSubview:webView];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.weibo.com/oauth2/authorize"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:kAuthorizeURL]];
     request.HTTPMethod = @"POST";
-    NSString *parameter = [NSString stringWithFormat:@"client_id=%@&redirect_uri=%@", AppKey, @"https://api.weibo.com/oauth2/default.html"];
+    NSString *parameter = [NSString stringWithFormat:@"client_id=%@&redirect_uri=%@", AppKey, kRedirectURL];
     NSData *requestBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPBody = requestBody;
     [webView loadRequest:request];
@@ -40,17 +48,17 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSString *url = webView.request.URL.absoluteString;
     NSLog(@"%@", url);
-    if ([url hasPrefix:@"https://api.weibo.com/oauth2/default.html"]) {
+    if ([url hasPrefix:kRedirectURL]) {
         NSArray *urlArray = [url componentsSeparatedByString:@"?"];
         self.weiboCode = [urlArray[1] substringFromIndex:5];
         NSLog(@"code:%@", self.weiboCode);
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.weibo.com/oauth2/access_token"]];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:kAccessTokenURL]];
         request.HTTPMethod = @"POST";
-        NSString *parameter = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&grant_type=authorization_code&redirect_uri=%@&code=%@", AppKey, AppSecret, @"https://api.weibo.com/oauth2/default.html", self.weiboCode];
+        NSString *parameter = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&grant_type=authorization_code&redirect_uri=%@&code=%@", AppKey, AppSecret, kRedirectURL, self.weiboCode];
         NSData *requestBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
         request.HTTPBody = requestBody;
         [webView loadRequest:request];
-    } else if ([url hasPrefix:@"https://api.weibo.com/oauth2/access_token"]) {
+    } else if ([url hasPrefix:kAccessTokenURL]) {
         NSString *jsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";
         NSString *HTMLSource = [webView stringByEvaluatingJavaScriptFromString:jsToGetHTMLSource];
         NSArray *htmlArray = [HTMLSource componentsSeparatedByString:@"{"];
@@ -58,9 +66,20 @@
         NSString *result = [[@"{" stringByAppendingString:array1[0]] stringByAppendingString:@"}"];
         NSData *data = [result dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        self.oauthModel = [[OAuthModel alloc] init];
         [self.oauthModel setValuesForKeysWithDictionary:dict];
         NSLog(@"%@", self.oauthModel);
+        NSLog(@"filePath:%@", documentationPath);
+        if (! [[NSFileManager defaultManager] fileExistsAtPath:documentationPath]) {
+            [[NSFileManager defaultManager] createDirectoryAtPath:documentationPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+        NSString *filePath = [documentationPath stringByAppendingPathComponent:@"oauth"];
+        [NSKeyedArchiver archiveRootObject:self.oauthModel toFile:filePath];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?access_token=%@&uid=%@", kUserInfoURL, self.oauthModel.access_token, self.oauthModel.uid]]];
+        NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@", dict);
+        }];
+        [task resume];
         [webView removeFromSuperview];
     }
 }
@@ -100,7 +119,13 @@
     self.navigationItem.title = @"首页";
     
     [self initTableView];
-    [self initOAuth];
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:[documentationPath stringByAppendingPathComponent:@"oauth"]]) {
+//        self.oauthModel = [NSKeyedUnarchiver unarchiveObjectWithFile:[documentationPath stringByAppendingPathComponent:@"oauth"]];
+//        NSLog(@"%@", self.oauthModel);
+//    } else
+//    {
+        [self initOAuth];
+//    }
 }
 
 - (void)dealloc {

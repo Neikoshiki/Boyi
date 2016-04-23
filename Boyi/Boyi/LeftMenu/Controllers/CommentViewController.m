@@ -9,23 +9,45 @@
 #import "CommentViewController.h"
 #import "UIScrollView+JElasticPullToRefresh.h"
 
+#import "NetWorkRequestManager.h"
+#import "URLHeaderDefine.h"
+#import "OAuthModel.h"
+#import "CommentModel.h"
+
 #define kReuseIdentifier @"reuseIdentifier"
 
 @interface CommentViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) OAuthModel *oauthModel;
+@property (nonatomic, strong) NSMutableArray *commentsArray;
 
 @end
 
 @implementation CommentViewController
 
+- (NSMutableArray *)commentsArray {
+    if (!_commentsArray) {
+        self.commentsArray = [NSMutableArray array];
+    }
+    return _commentsArray;
+}
+
+- (OAuthModel *)oauthModel {
+    if (!_oauthModel) {
+        self.oauthModel = [[OAuthModel alloc] init];
+    }
+    return _oauthModel;
+}
+
 #pragma mark -TableView 代理方法-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.commentsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuseIdentifier forIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     return cell;
 }
 
@@ -34,6 +56,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kReuseIdentifier];
     self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
     JElasticPullToRefreshLoadingViewCircle *loadingViewCircle = [[JElasticPullToRefreshLoadingViewCircle alloc] init];
@@ -48,6 +71,24 @@
     [self.tableView setJElasticPullToRefreshBackgroundColor:self.tableView.backgroundColor];
 }
 
+- (void)requestDataWithAccessToken:(NSString *)accessToken {
+    [NetWorkRequestManager requestWithType:GET urlString:[kCommentsToMeURL stringByAppendingString:[NSString stringWithFormat:@"?access_token=%@", accessToken]] parseDict:nil finish:^(NSData *data) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"%@", dict);
+        NSArray *array = dict[@"comments"];
+        for (CommentModel *comment in array) {
+            NSLog(@"comment is %@", comment);
+            [self.commentsArray addObject:comment];
+        }
+        NSLog(@"comments count is %ld", self.commentsArray.count);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    } error:^(NSError *error) {
+        NSLog(@"error:%@", error);
+    }];
+}
+
 #pragma mark -视图加载-
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,6 +96,9 @@
     self.navigationItem.title = @"评论";
     
     [self initTableView];
+    
+    self.oauthModel = [NSKeyedUnarchiver unarchiveObjectWithFile:[documentationPath stringByAppendingPathComponent:@"oauth"]];
+    [self requestDataWithAccessToken:self.oauthModel.access_token];
 }
 
 - (void)dealloc {

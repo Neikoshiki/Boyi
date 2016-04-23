@@ -16,6 +16,7 @@
 
 #define AppKey @"525578663"
 #define AppSecret @"d721f856aaf5e888760440e9b057c8e1"
+#define documentationPath [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) lastObject]
 
 #ifdef DEBUG
 #define Log(...) NSLog(__VA_ARGS__)

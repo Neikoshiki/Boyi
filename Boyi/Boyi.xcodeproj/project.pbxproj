@@ -36,6 +36,12 @@
 		C01F64441CC130FF002EE3FA /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01F64431CC130FF002EE3FA /* MessageViewController.m */; };
 		C01F64471CC13106002EE3FA /* LikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01F64461CC13106002EE3FA /* LikeViewController.m */; };
 		C0688DF71CCA287500133C07 /* OAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0688DF61CCA287500133C07 /* OAuthModel.m */; };
+		C098CF1B1CCB05DB007CCA6E /* NetWorkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C098CF1A1CCB05DB007CCA6E /* NetWorkRequestManager.m */; };
+		C098CF1E1CCB20E0007CCA6E /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C098CF1D1CCB20E0007CCA6E /* CommentModel.m */; };
+		C098CF211CCB2232007CCA6E /* StatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C098CF201CCB2232007CCA6E /* StatusModel.m */; };
+		C098CF241CCB23D4007CCA6E /* GeoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C098CF231CCB23D4007CCA6E /* GeoModel.m */; };
+		C098CF271CCB25E8007CCA6E /* WeiboVisibleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C098CF261CCB25E8007CCA6E /* WeiboVisibleModel.m */; };
+		C098CF2A1CCB271A007CCA6E /* PicUrlsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C098CF291CCB271A007CCA6E /* PicUrlsModel.m */; };
 		C0F0112D1CC1CC4F00B1C09B /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F0112B1CC1CC4F00B1C09B /* HotViewController.m */; };
 		C0F0112E1CC1CC4F00B1C09B /* HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0F0112C1CC1CC4F00B1C09B /* HotViewController.xib */; };
 /* End PBXBuildFile section */
@@ -106,6 +112,18 @@
 		C01F64481CC1324E002EE3FA /* FrameDefineHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameDefineHeader.h; sourceTree = "<group>"; };
 		C0688DF51CCA287500133C07 /* OAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthModel.h; sourceTree = "<group>"; };
 		C0688DF61CCA287500133C07 /* OAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthModel.m; sourceTree = "<group>"; };
+		C098CF191CCB05DB007CCA6E /* NetWorkRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkRequestManager.h; sourceTree = "<group>"; };
+		C098CF1A1CCB05DB007CCA6E /* NetWorkRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkRequestManager.m; sourceTree = "<group>"; };
+		C098CF1C1CCB20E0007CCA6E /* CommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
+		C098CF1D1CCB20E0007CCA6E /* CommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
+		C098CF1F1CCB2232007CCA6E /* StatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusModel.h; sourceTree = "<group>"; };
+		C098CF201CCB2232007CCA6E /* StatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusModel.m; sourceTree = "<group>"; };
+		C098CF221CCB23D4007CCA6E /* GeoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoModel.h; sourceTree = "<group>"; };
+		C098CF231CCB23D4007CCA6E /* GeoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoModel.m; sourceTree = "<group>"; };
+		C098CF251CCB25E8007CCA6E /* WeiboVisibleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboVisibleModel.h; sourceTree = "<group>"; };
+		C098CF261CCB25E8007CCA6E /* WeiboVisibleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboVisibleModel.m; sourceTree = "<group>"; };
+		C098CF281CCB271A007CCA6E /* PicUrlsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicUrlsModel.h; sourceTree = "<group>"; };
+		C098CF291CCB271A007CCA6E /* PicUrlsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicUrlsModel.m; sourceTree = "<group>"; };
 		C0F0112A1CC1CC4F00B1C09B /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
 		C0F0112B1CC1CC4F00B1C09B /* HotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotViewController.m; sourceTree = "<group>"; };
 		C0F0112C1CC1CC4F00B1C09B /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
@@ -285,6 +303,14 @@
 			children = (
 				C0688DF51CCA287500133C07 /* OAuthModel.h */,
 				C0688DF61CCA287500133C07 /* OAuthModel.m */,
+				C098CF1F1CCB2232007CCA6E /* StatusModel.h */,
+				C098CF201CCB2232007CCA6E /* StatusModel.m */,
+				C098CF221CCB23D4007CCA6E /* GeoModel.h */,
+				C098CF231CCB23D4007CCA6E /* GeoModel.m */,
+				C098CF251CCB25E8007CCA6E /* WeiboVisibleModel.h */,
+				C098CF261CCB25E8007CCA6E /* WeiboVisibleModel.m */,
+				C098CF281CCB271A007CCA6E /* PicUrlsModel.h */,
+				C098CF291CCB271A007CCA6E /* PicUrlsModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,6 +352,8 @@
 		C01F64001CC12ED6002EE3FA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C098CF1C1CCB20E0007CCA6E /* CommentModel.h */,
+				C098CF1D1CCB20E0007CCA6E /* CommentModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -351,6 +379,8 @@
 				C01F64031CC12F76002EE3FA /* Boyi-Bridging-Header.h */,
 				C01F64481CC1324E002EE3FA /* FrameDefineHeader.h */,
 				C0F0112F1CC1DFA500B1C09B /* URLHeaderDefine.h */,
+				C098CF191CCB05DB007CCA6E /* NetWorkRequestManager.h */,
+				C098CF1A1CCB05DB007CCA6E /* NetWorkRequestManager.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -622,11 +652,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C01F640D1CC12F86002EE3FA /* FlowingMenuTransitionManager.swift in Sources */,
+				C098CF241CCB23D4007CCA6E /* GeoModel.m in Sources */,
 				C01F64361CC13093002EE3FA /* BaseViewController.m in Sources */,
 				C01F64051CC12F77002EE3FA /* FlowingMenuDelegate.swift in Sources */,
 				C01F64471CC13106002EE3FA /* LikeViewController.m in Sources */,
+				C098CF271CCB25E8007CCA6E /* WeiboVisibleModel.m in Sources */,
 				C01F64411CC130F9002EE3FA /* AtViewController.m in Sources */,
 				C01F643A1CC130AB002EE3FA /* HomeViewController.m in Sources */,
+				C098CF2A1CCB271A007CCA6E /* PicUrlsModel.m in Sources */,
 				C01F64111CC12F86002EE3FA /* FlowingMenuTransitionManager+UIViewControllerTransitioningDelegate.swift in Sources */,
 				C01F640F1CC12F86002EE3FA /* FlowingMenuTransitionManager+UIGestureRecognizer.swift in Sources */,
 				C01F64131CC12F86002EE3FA /* UIView.swift in Sources */,
@@ -636,10 +669,13 @@
 				C01F64121CC12F86002EE3FA /* FlowingMenuTransitionStatus.swift in Sources */,
 				C01F643E1CC130F3002EE3FA /* CommentViewController.m in Sources */,
 				C01F63C81CC12E7F002EE3FA /* ViewController.m in Sources */,
+				C098CF1B1CCB05DB007CCA6E /* NetWorkRequestManager.m in Sources */,
 				C0F0112D1CC1CC4F00B1C09B /* HotViewController.m in Sources */,
 				C01F640E1CC12F86002EE3FA /* FlowingMenuTransitionManager+Delegate.swift in Sources */,
 				C01F63C51CC12E7F002EE3FA /* AppDelegate.m in Sources */,
+				C098CF211CCB2232007CCA6E /* StatusModel.m in Sources */,
 				C01F63C21CC12E7F002EE3FA /* main.m in Sources */,
+				C098CF1E1CCB20E0007CCA6E /* CommentModel.m in Sources */,
 				C0688DF71CCA287500133C07 /* OAuthModel.m in Sources */,
 				C01F642D1CC13050002EE3FA /* ExploreViewController.m in Sources */,
 				C01F64101CC12F86002EE3FA /* FlowingMenuTransitionManager+UIViewControllerAnimatedTransitioning.swift in Sources */,

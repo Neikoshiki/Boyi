@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OAuthModel : NSObject
+@interface OAuthModel : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *access_token;
 @property (nonatomic, strong) NSString *expires_in;

@@ -30,3 +30,9 @@
 #define kUserInfoURL @"https://api.weibo.com/2/users/show.json"
 // 高级授权
 #define kAuthorizeURL @"https://api.weibo.com/oauth2/authorize"
+// 回调请求页
+#define kRedirectURL @"https://api.weibo.com/oauth2/default.html"
+// 获取accessToken
+#define kAccessTokenURL @"https://api.weibo.com/oauth2/access_token"
+// 收到的评论
+#define kCommentsToMeURL @"https://api.weibo.com/2/comments/to_me.json"
