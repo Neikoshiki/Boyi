@@ -74,13 +74,12 @@
 - (void)requestDataWithAccessToken:(NSString *)accessToken {
     [NetWorkRequestManager requestWithType:GET urlString:[kCommentsToMeURL stringByAppendingString:[NSString stringWithFormat:@"?access_token=%@", accessToken]] parseDict:nil finish:^(NSData *data) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"%@", dict);
         NSArray *array = dict[@"comments"];
-        for (CommentModel *comment in array) {
-            NSLog(@"comment is %@", comment);
-            [self.commentsArray addObject:comment];
+        for (NSDictionary *commentDict in array) {
+            CommentModel *comment = [[CommentModel alloc] init];
+            [comment setValuesForKeysWithDictionary:commentDict];
+            NSLog(@"%@", comment.text);
         }
-        NSLog(@"comments count is %ld", self.commentsArray.count);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });

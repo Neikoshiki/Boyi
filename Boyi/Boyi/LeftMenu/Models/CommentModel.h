@@ -13,7 +13,7 @@
 @interface CommentModel : NSObject
 
 @property (nonatomic, copy) NSString *created_at;
-@property (nonatomic, strong) NSNumber *sourceID;
+@property (nonatomic, strong) NSNumber *sourceId;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *source;
 @property (nonatomic, strong) WeiboUser *user;
